@@ -1,11 +1,17 @@
 '''Module containing functions to setup componenets of the game.'''
-
+import game_engine as g
 
 def initialise_board(size = 10):
     """Returns a list of 'size' elements, with each 
     element beign a list containing 'size' elements."""
 
-    return [[None] * size] * size
+    #return [[None] * size] * size
+    board = []
+
+    for i in range(10):
+        board.append([None] * 10)
+
+    return board
 
 
 def create_battleships(filename = 'battleships.txt'):
@@ -31,9 +37,10 @@ def place_battleships(board, ships, algorithm = 'Simple'):
             for col in range(ships[ship]):
                 board[row][col] = ship
             row += 1
-            
-    
+
     return board
 
-print(create_battleships())
-print(place_battleships(initialise_board(), create_battleships()))
+
+if __name__ == '__main__':
+    g.single_game_loop()
+    
