@@ -30,7 +30,6 @@ def create_battleships(filename = 'battleships.txt'):
 def place_battleships(board, ships, algorithm = 'Simple'):
     """Places the battleships on the board using the 
     specified algorithm and returns the board."""
-
     if algorithm == 'Simple':
         row = 0
         for ship in ships:
@@ -38,9 +37,42 @@ def place_battleships(board, ships, algorithm = 'Simple'):
                 board[row][col] = ship
             row += 1
 
+    if algorithm == 'Random':
+        import random as r
+
+        for ship in ships:
+            #Chooses wether the ship will be horiaontal or vertical
+            rotation = r.choice(['Horizontal', 'Vertical'])
+            print(rotation)
+
+            if rotation == 'Horizontal':
+                while True:
+                    row = r.randint(0, len(board) - 1)
+                    col = r.randint(0, len(board) - ships[ship])
+                    if all(x == None for x in board[row][col : (col + ships[ship])]):
+                        break
+                for i in range(ships[ship]):
+                    board[row][col + i] = ship
+
+            if rotation == 'Vertical':
+                while True:
+                    row = r.randint(0, len(board) - ships[ship])
+                    col = r.randint(0, len(board) - 1)
+
+                    if all(x == None for x in board[row][col : col + (ships[ship])]):
+                        break
+                for i in range(ships[ship]):
+                    board[row + i][col] = ship
+                
+
+    if algorithm == 'Custom':
+        #Custom code
+        print("Custom")
+
     return board
 
 
 if __name__ == '__main__':
+
     g.single_game_loop()
     
