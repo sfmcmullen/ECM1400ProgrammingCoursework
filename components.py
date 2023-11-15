@@ -1,5 +1,6 @@
 '''Module containing functions to setup componenets of the game.'''
 import game_engine as g
+import mp_game_engine as mg
 
 def initialise_board(size = 10):
     """Returns a list of 'size' elements, with each 
@@ -80,6 +81,4 @@ def place_battleships(board, ships, algorithm = 'Simple'):
 if __name__ == '__main__':
 
     #g.single_game_loop()
-    g.ai_opponent_game_loop()
-    
-    
+    mg.ai_opponent_game_loop()
