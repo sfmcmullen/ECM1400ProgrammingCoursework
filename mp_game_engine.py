@@ -1,11 +1,32 @@
 """Contains ai game functions"""
 import components as c
-import game_engine as g
 
 #Dictionary of players. Key = Username, Value = Board
 players = {}
 #Stores the values of previous attacks for generate_attack
 ai_previous_attacks = []
+
+
+def cli_coordinates_input():
+    """Takes inputs for x, y cooridnates and returns tuple."""
+
+    row = int(input("What is the row you would like to attack? >>>"))
+    column = int(input("What is the column you would like to attack? >>>"))
+    return (row, column)
+
+
+def attack(coordinates, board, battleships):
+    """Return true if the coordinate is a ship, else return false.
+    If the ship value is 0 in battleships, then the ship is sunk."""
+
+    if board[coordinates[0]][coordinates[1]] is not None:
+        #Decrement the value of remaining pieces in the battleships dictionary
+        battleships[board[coordinates[0]][coordinates[1]]] -= 1
+        #Set the square to 0 as that area has been sunk
+        board[coordinates[0]][coordinates[1]] = None
+        return True
+
+    return False
 
 
 def generate_attack(board_size = 10):
@@ -37,13 +58,13 @@ def ai_opponent_game_loop():
 
     while True:
         #User attack
-        coordinates = g.cli_coordinates_input()
+        coordinates = cli_coordinates_input()
         result = {True: "hit", False: "missed"}
-        print(f"You {result[g.attack(coordinates, players['player2'], battleships['player2'])]} the AI.")
+        print(f"You {result[attack(coordinates, players['player2'], battleships['player2'])]} the AI.")
         #AI attack
         coordinates = generate_attack()
         result = {True: "hit", False: "Miss"}
-        print(f"The AI {result[g.attack(coordinates, players['player1'], battleships['player1'])]} you.")
+        print(f"The AI {result[attack(coordinates, players['player1'], battleships['player1'])]} you.")
 
         print("\nUser's Board")
         display_board(players['player1'])
