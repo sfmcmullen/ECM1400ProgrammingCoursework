@@ -1,6 +1,8 @@
 '''Module containing functions to setup componenets of the game.'''
 import game_engine as g
 import mp_game_engine as mg
+import random as r
+import json
 
 def initialise_board(size = 10):
     """Returns a list of 'size' elements, with each 
@@ -40,8 +42,6 @@ def place_battleships(board, ships, algorithm = 'Simple'):
             row += 1
 
     if algorithm == 'Random':
-        import random as r
-
         for ship in ships:
             #Chooses wether the ship will be horiaontal or vertical
             rotation = r.choice(['Horizontal', 'Vertical'])
@@ -67,15 +67,13 @@ def place_battleships(board, ships, algorithm = 'Simple'):
              
 
     if algorithm == 'Custom':
-        import json
-
         f = open("placement.json", "r")
         data = json.load(f)
         f.close()
 
         for ship in data:
-            column = data[ship][0]
-            row = data[ship][1]
+            column = int(data[ship][0])
+            row = int(data[ship][1])
             rotation = data[ship][2]
 
             if rotation == 'h':
