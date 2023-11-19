@@ -17,7 +17,7 @@ def generate_attack(board_size = 10):
         row, column = r.randint(0, board_size - 1), r.randint(0, board_size - 1)
 
     ai_previous_attacks.append((row, column))
-    return (row, column)
+    return (column, row)
 
 
 def ai_opponent_game_loop():

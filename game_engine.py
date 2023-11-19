@@ -5,19 +5,19 @@ import components as c
 def attack(coordinates, board, battleships):
     """Return true if the coordinate is a ship, else return false.
     If the ship value is 0 in battleships, then the ship is sunk."""
-
-    if board[coordinates[0]][coordinates[1]] is not None:
+    
+    if board[int(coordinates[0])][int(coordinates[1])] is not None:
         #Decrement the value of remaining pieces in the battleships dictionary
-        battleships[board[coordinates[0]][coordinates[1]]] -= 1
+        battleships[board[int(coordinates[0])][int(coordinates[1])]] -= 1
         #Set the square to 0 as that area has been sunk
-        board[coordinates[0]][coordinates[1]] = None
+        board[int(coordinates[0])][int(coordinates[1])] = None
         return True
 
     return False
 
 
 def cli_coordinates_input():
-    """Takes inputs for x, y cooridnates and returns tuple."""
+    """Takes inputs for x, y coordinates and returns tuple."""
 
     row = int(input("What is the row you would like to attack? >>>"))
     column = int(input("What is the column you would like to attack? >>>"))
