@@ -21,7 +21,7 @@ def create_battleships(filename = 'battleships.txt'):
 
     f = open(filename, 'r')
     for line in f:
-        battleships[line.split('-')[0]] = int(line.replace('\n', '').split('-')[1])
+        battleships[line.split(':')[0]] = int(line.replace('\n', '').split(':')[1])
 
     return battleships
 
@@ -29,6 +29,8 @@ def create_battleships(filename = 'battleships.txt'):
 def place_battleships(board, ships, algorithm = 'Simple'):
     """Places the battleships on the board using the 
     specified algorithm and returns the board."""
+
+    #Board is accessed where each list is a row and then each item in the list is a column
 
     if algorithm == 'Simple':
         row = 0
@@ -62,7 +64,7 @@ def place_battleships(board, ships, algorithm = 'Simple'):
                         break
                 for i in range(ships[ship]):
                     board[row + i][col] = ship
-                
+             
 
     if algorithm == 'Custom':
         import json
@@ -71,14 +73,25 @@ def place_battleships(board, ships, algorithm = 'Simple'):
         data = json.load(f)
         f.close()
 
-        for ship in ships:
-            for coord in data[ship]:
-                board[coord[0]][coord[1]] = ship
+        for ship in data:
+            column = data[ship][0]
+            row = data[ship][1]
+            rotation = data[ship][2]
+
+            if rotation == 'h':
+                #Sets every position in row, from start col 
+                #to the ships length elements away from that position horizontally
+                for i in range(ships[ship]):
+                    board[row][column + i] = ship
+            else:
+                #Sets every position in col, from start row 
+                #to the ships length elements away from that position vertically
+                for i in range(ships[ship]):
+                    board[row + i][column] = ship
 
     return board
 
 
 if __name__ == '__main__':
-
     #g.single_game_loop()
     mg.ai_opponent_game_loop()

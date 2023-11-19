@@ -68,8 +68,9 @@ def ai_opponent_game_loop():
 
         print("\nUser's Board")
         display_board(players['player1'])
+        #Used during testing to see the effect on AI's board
         print("\nAI's Board")
-        display_board(players['player2']) #Used during testing to see the effect on AI's board
+        display_board(players['player2'])
         print("")
 
         #Used to check if there exists a ship longer than 0 (not sunk) for both players
@@ -83,7 +84,7 @@ def ai_opponent_game_loop():
 
 def display_board(board):
     """Displays an ASCII representation of the input board"""
-    symbols = {'Aircraft Carrier': 'A','Battleship': 'B', 'Cruiser': 'C', 'Submarine': 'S', 'Destroyer': 'D', None: '_'}
+    symbols = {'Aircraft_Carrier': 'A','Battleship': 'B', 'Cruiser': 'C', 'Submarine': 'S', 'Destroyer': 'D', None: '_'}
 
     row_num = 0
     print("   0 1 2 3 4 5 6 7 8 9")
