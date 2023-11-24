@@ -19,9 +19,9 @@ def attack(coordinates, board, battleships):
 def cli_coordinates_input():
     """Takes inputs for x, y coordinates and returns tuple."""
 
-    row = int(input("What is the row you would like to attack? >>>"))
-    column = int(input("What is the column you would like to attack? >>>"))
-    return (row, column)
+    y = int(input("What is the row you would like to attack? >>>"))
+    x = int(input("What is the column you would like to attack? >>>"))
+    return (y, x)
 
 
 def single_game_loop():
@@ -38,8 +38,6 @@ def single_game_loop():
         coordinates = cli_coordinates_input()
         result = {True: "Hit", False: "Miss"}
         print(result[attack(coordinates, board, battleships)])
-        print("Current Board: ")
-        print(board)
         print("")
 
         #Used to check if there exists a ship longer than 0 (not sunk)

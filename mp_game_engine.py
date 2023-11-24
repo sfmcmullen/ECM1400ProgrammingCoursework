@@ -12,12 +12,12 @@ def generate_attack(board_size = 10):
     """Returns a tuple with coordinates to be passed to the attack function"""
     import random as r
 
-    row, column = r.randint(0, board_size - 1), r.randint(0, board_size - 1)
-    while (row, column) in ai_previous_attacks:
-        row, column = r.randint(0, board_size - 1), r.randint(0, board_size - 1)
+    y, x = r.randint(0, board_size - 1), r.randint(0, board_size - 1)
+    while (y, x) in ai_previous_attacks:
+        y, x = r.randint(0, board_size - 1), r.randint(0, board_size - 1)
 
-    ai_previous_attacks.append((row, column))
-    return (column, row)
+    ai_previous_attacks.append((y, x))
+    return (x, y)
 
 
 def ai_opponent_game_loop():
@@ -50,6 +50,7 @@ def ai_opponent_game_loop():
         #Used during testing to see the effect on AI's board
         print("\nAI's Board")
         display_board(players['player2'])
+        #end of test////
         print("")
 
         #Used to check if there exists a ship longer than 0 (not sunk) for both players

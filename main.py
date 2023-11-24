@@ -65,9 +65,6 @@ def attack():
         g.attack(ai_attack, players['player'], battleships['player'])
         print(ai_attack)
 
-        mg.display_board(players['player']) #TESTING!!!!!!!!!!!!!!!!!!!!!!!
-        mg.display_board(players['AI'])
-
         #Used to check if there exists a ship longer than 0 (not sunk) for both players
         if not(any(x != 0 for x in battleships['player'].values())):
             #AI wins
