@@ -92,4 +92,4 @@ def place_battleships(board, ships, algorithm = 'Simple'):
 
 if __name__ == '__main__':
     g.simple_game_loop()
-    mg.ai_opponent_game_loop()
+    #mg.ai_opponent_game_loop()

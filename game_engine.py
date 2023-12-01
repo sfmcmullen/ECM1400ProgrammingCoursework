@@ -19,9 +19,18 @@ def attack(coordinates, board, battleships):
 def cli_coordinates_input():
     """Takes inputs for x, y coordinates and returns tuple."""
 
-    y = int(input("What is the row you would like to attack? >>>"))
-    x = int(input("What is the column you would like to attack? >>>"))
+    try:
+        y = int(input("What is the row you would like to attack? >>>"))
+        x = int(input("What is the column you would like to attack? >>>"))
+    except TypeError:
+        raise TypeError("Incorrect value type entered.")
+    except ValueError:
+        raise ValueError("Incorrect value entered.")
+    except Exception:
+        raise Exception("Another error was encountered.")
+
     return (y, x)
+
 
 
 def simple_game_loop():
