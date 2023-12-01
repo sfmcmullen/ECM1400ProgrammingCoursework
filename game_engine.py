@@ -24,7 +24,7 @@ def cli_coordinates_input():
     return (y, x)
 
 
-def single_game_loop():
+def simple_game_loop():
     """Runs a single loop of the game."""
     
     print("~~~~~ Welcome to Battleships! ~~~~~")
