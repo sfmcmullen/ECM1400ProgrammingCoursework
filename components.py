@@ -6,7 +6,7 @@ import json
 
 def initialise_board(size = 10):
     """Returns a list of 'size' elements, with each 
-    element beign a list containing 'size' elements."""
+    element being a list containing 'size' elements."""
     board = []
 
     for _ in range(10):
@@ -16,11 +16,12 @@ def initialise_board(size = 10):
 
 
 def create_battleships(filename = 'battleships.txt'):
-    """Reads the file and returns a dictionary containing 
+    """Reads the file 'filename' and returns a dictionary containing 
     keys as battleship name and value as its size."""
 
     battleships = {}
 
+    #Loop through each line of the file and split it into the part before and after ':'
     f = open(filename, 'r')
     for line in f:
         battleships[line.split(':')[0]] = int(line.replace('\n', '').split(':')[1])
@@ -32,7 +33,8 @@ def place_battleships(board, ships, algorithm = 'Simple'):
     """Places the battleships on the board using the 
     specified algorithm and returns the board."""
 
-    #Board is accessed where each list is a row and then each item in the list is a column
+    #Board is accessed where each list is a row and then 
+    #each item in the list is a column in that row
 
     if algorithm == 'Simple':
         row = 0
@@ -91,5 +93,11 @@ def place_battleships(board, ships, algorithm = 'Simple'):
 
 
 if __name__ == '__main__':
+
+    #Runs a simple game against computer made board,
+    #but just attacking with no computer return fire
     g.simple_game_loop()
-    #mg.ai_opponent_game_loop()
+
+    #Runs a game against a random computer board and custom user board,
+    #with the computer also returning fire against the users board
+    mg.ai_opponent_game_loop()
