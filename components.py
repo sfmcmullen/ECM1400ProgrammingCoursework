@@ -96,7 +96,7 @@ if __name__ == '__main__':
 
     # Runs a simple game against computer made board,
     # but just attacking with no computer return fire
-    g.simple_game_loop()
+    #g.simple_game_loop()
 
     # Runs a game against a random computer board and custom user board,
     # with the computer also returning fire against the users board

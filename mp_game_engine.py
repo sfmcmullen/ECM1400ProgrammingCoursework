@@ -60,16 +60,24 @@ def ai_opponent_game_loop():
 
 def display_board(board):
     """Displays an ASCII representation of the input board"""
-    symbols = {'Aircraft_Carrier': 'A','Battleship': 'B', 'Cruiser': 'C', 'Submarine': 'S', 'Destroyer': 'D', None: '_'}
+    #symbols = {'Aircraft_Carrier': 'A','Battleship': 'B', 'Cruiser': 'C', 'Submarine': 'S', 'Destroyer': 'D', None: '_'}
+    ships = c.create_battleships()
+    ship_keys = {None: "__"}
+    for ship in ships:
+        ship_keys[ship] = ship[0] + ship[1]
+
 
     row_num = 0
-    print("   0 1 2 3 4 5 6 7 8 9")
-    print("   ___________________")
+    print("   0  1  2  3  4  5  6  7  8  9")
+    print("   ____________________________")
     for row in board:
         row_ascii = ""
         for column in row:
-            row_ascii += (f"{symbols[column]}|")
+            row_ascii += (f"{ship_keys[column]}|")
         print(f"{row_num} |{row_ascii}")
         row_num += 1
     
-    print("KEY:\nAircraft Carrier: A, Battleship: B, Cruiser: C, Submarine: S, Destroyer: D")
+    #Print the keys of the ships
+    print("\nKEYS:")
+    for ship in ship_keys:
+        print(f"{ship}: {ship_keys[ship]}")
