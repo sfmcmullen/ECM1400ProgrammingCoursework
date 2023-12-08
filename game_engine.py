@@ -3,7 +3,7 @@ import components as c
 
 
 def attack(coordinates, board, battleships):
-    """Return true if the coordinate is a ship, else return false.
+    """Return true if the coordinate (row,col) is a ship, else return false.
     If the ship value is 0 in battleships, then the ship is sunk."""
     
     if board[int(coordinates[0])][int(coordinates[1])] is not None:

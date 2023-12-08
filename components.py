@@ -21,7 +21,7 @@ def create_battleships(filename = 'battleships.txt'):
 
     battleships = {}
 
-    #Loop through each line of the file and split it into the part before and after ':'
+    # Loop through each line of the file and split it into the part before and after ':'
     f = open(filename, 'r')
     for line in f:
         battleships[line.split(':')[0]] = int(line.replace('\n', '').split(':')[1])
@@ -33,8 +33,8 @@ def place_battleships(board, ships, algorithm = 'Simple'):
     """Places the battleships on the board using the 
     specified algorithm and returns the board."""
 
-    #Board is accessed where each list is a row and then 
-    #each item in the list is a column in that row
+    # Board is accessed where each list is a row and then 
+    # each item in the list is a column in that row
 
     if algorithm == 'Simple':
         row = 0
@@ -45,7 +45,7 @@ def place_battleships(board, ships, algorithm = 'Simple'):
 
     if algorithm == 'Random':
         for ship in ships:
-            #Chooses wether the ship will be horiaontal or vertical
+            # Chooses wether the ship will be horiaontal or vertical
             rotation = r.choice(['Horizontal', 'Vertical'])
 
             if rotation == 'Horizontal':
@@ -79,13 +79,13 @@ def place_battleships(board, ships, algorithm = 'Simple'):
             rotation = data[ship][2]
 
             if rotation == 'h':
-                #Sets every position in row, from start col 
-                #to the ships length elements away from that position horizontally
+                # Sets every position in row, from start col 
+                # to the ships length elements away from that position horizontally
                 for i in range(ships[ship]):
                     board[row][column + i] = ship
             else:
-                #Sets every position in col, from start row 
-                #to the ships length elements away from that position vertically
+                # Sets every position in col, from start row 
+                # to the ships length elements away from that position vertically
                 for i in range(ships[ship]):
                     board[row + i][column] = ship
 
@@ -94,10 +94,10 @@ def place_battleships(board, ships, algorithm = 'Simple'):
 
 if __name__ == '__main__':
 
-    #Runs a simple game against computer made board,
-    #but just attacking with no computer return fire
+    # Runs a simple game against computer made board,
+    # but just attacking with no computer return fire
     g.simple_game_loop()
 
-    #Runs a game against a random computer board and custom user board,
-    #with the computer also returning fire against the users board
+    # Runs a game against a random computer board and custom user board,
+    # with the computer also returning fire against the users board
     mg.ai_opponent_game_loop()
