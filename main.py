@@ -50,7 +50,7 @@ def root():
 
 
 @app.route('/attack', methods = ['GET'])
-def attack():
+def process_attack():
     """Attack function"""
     if request.args:
         x = request.args.get('x')
@@ -63,7 +63,6 @@ def attack():
             ai_attack = mg.generate_attack(board_size)
         ai_previous_attacks.append(ai_attack)
         g.attack(ai_attack, players['player'], battleships['player'])
-        print(ai_attack)
 
         #Used to check if there exists a ship longer than 0 (not sunk) for both players
         if not(any(x != 0 for x in battleships['player'].values())):
