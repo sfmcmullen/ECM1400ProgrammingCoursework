@@ -2,9 +2,9 @@
 import components as c
 import game_engine as g
 
-#Dictionary of players. Key = Username, Value = Board
+# Dictionary of players. Key = Username, Value = Board
 players = {}
-#Stores the values of previous attacks for generate_attack
+# Stores the values of previous attacks for generate_attack
 ai_previous_attacks = []
 
 
@@ -17,7 +17,7 @@ def generate_attack(board_size = 10):
         y, x = r.randint(0, board_size - 1), r.randint(0, board_size - 1)
 
     ai_previous_attacks.append((y, x))
-    return (x, y)
+    return (y, x)
 
 
 def ai_opponent_game_loop():
@@ -25,35 +25,31 @@ def ai_opponent_game_loop():
 
     print("~~~~~ Welcome to Battleships! ~~~~~")
 
-    #Creates battleships for both players
+    # Creates battleships for both players
     battleships = {}
     battleships['player1'] = c.create_battleships()
     battleships['player2'] = c.create_battleships()
 
-    #creates a board and battleships and then places the batttleships and stores in p1
+    # creates a board and battleships and then places the batttleships and stores in p1
     players['player1'] = c.place_battleships(c.initialise_board(), battleships['player1'], 'Custom')
-    #creates a board and battleships and then places the batttleships and stores in p2
+    # creates a board and battleships and then places the batttleships and stores in p2
     players['player2'] = c.place_battleships(c.initialise_board(), battleships['player2'], 'Random')
 
     while True:
-        #User attack
+        # User attack
         coordinates = g.cli_coordinates_input()
         result = {True: "hit", False: "missed"}
         print(f"You {result[g.attack(coordinates, players['player2'], battleships['player2'])]} the AI.")
-        #AI attack
+        # AI attack
         coordinates = generate_attack()
         result = {True: "hit", False: "Miss"}
         print(f"The AI {result[g.attack(coordinates, players['player1'], battleships['player1'])]} you.")
 
         print("\nUser's Board")
         display_board(players['player1'])
-        #Used during testing to see the effect on AI's board
-        print("\nAI's Board")
-        display_board(players['player2'])
-        #end of test////
         print("")
 
-        #Used to check if there exists a ship longer than 0 (not sunk) for both players
+        # Used to check if there exists a ship longer than 0 (not sunk) for both players
         if not(any(x != 0 for x in battleships['player1'].values())):
             print("~~~~~~ Good attempt. Better luck next time! ~~~~~~")
             break

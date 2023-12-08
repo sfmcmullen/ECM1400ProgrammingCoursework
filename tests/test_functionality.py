@@ -1,5 +1,6 @@
 from components import initialise_board, create_battleships, place_battleships
 from game_engine import attack
+from mp_game_engine import generate_attack
 
 
 def test_initialise_board_return_size():
@@ -114,3 +115,20 @@ def test_attack_function():
     assert attack((1, 1), board, battleships) == True, "The attack function didn't coorectly identify a miss."
     assert battleships['Ship1'] == 0, "The attack function didn't subtract from the correct ship value in the battleship dictionary."
     assert battleships['Ship2'] == 0, "The attack function didn't subtract from the correct ship value in the battleship dictionary."
+
+
+def test_generate_attack_in_bounds():
+    """
+    Test if generate attack creates a unique attack within the bounds of the board
+    """
+    size = 10
+    #Stores previous attacks of the function
+    ai_previous_attacks = []
+    #Generate 100 attacks, so that all 10x10 slots of the board are attacked up
+    for _ in range(100):
+        coordinates = generate_attack(size)
+        assert coordinates[0] < 10, "generate_attack function y-coordinate was out of range (too large)"
+        assert coordinates[0] >= 0, "generate_attack function y-coordinate was out of range (too small)"
+        assert coordinates[1] < 10, "generate_attack function x-coordinate was out of range (too large)"
+        assert coordinates[1] >= 0, "generate_attack function x-coordinate was out of range (too small)"
+        assert coordinates not in ai_previous_attacks, "generate_attack function generated duplicate coordinate"
