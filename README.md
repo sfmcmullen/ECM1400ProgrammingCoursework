@@ -22,7 +22,7 @@ You will have to run the following commands in the command prompt to have all av
 
 ### Getting Started
 
-Run the code from the terminal by typing ``python main.py`` from within the ECM1400ProgrammingCoursework directory.  
+Run the code from the terminal by typing ``python main.py`` from within the Battleships directory.  
 A link similar to http://127.0.0.1:5000 will be displayed within the terminal window. Click on the link to open the game in a web browser, or just type the displayed link into your browser.  
 Then access the placement path by appending */placement* to the end of your URL in your browser. For example from the root path http://127.0.0.1:5000/ we have here you would enter http://127.0.0.1:5000/placement.  
 Once you have completed the placement and submitted your grid you will be redirected to the root page where you will then be able to commence attacks on the opponent's grid until either you or the opponent has won the game.
@@ -30,8 +30,8 @@ Once you have completed the placement and submitted your grid you will be redire
 
 ### Testing
 
-To test that the code is running correctly on your device there is a folder in the ECM1400ProgrammingCoursework directory called tests. From there there are several modules to test different aspects of the code.  
-If using VS code to run the program you can use the Python test manager (flask icon on sidebar) and configure it so that the test folder is the *tests* folder from the current ECM1400ProgrammingCoursework directory. Then just run the tests folder within the test manager using the play button and if any test fails you will be able to see the test and its error. For other IDEs, you should use their respective test managers to run the tests in a similar fashion.
+To test that the code is running correctly on your device there is a folder in the Battleships directory called tests. From there there are several modules to test different aspects of the code.  
+If using VS code to run the program you can use the Python test manager (flask icon on sidebar) and configure it so that the test folder is the *tests* folder from the current Battleships directory. Then just run the tests folder within the test manager using the play button and if any test fails you will be able to see the test and its error. For other IDEs, you should use their respective test managers to run the tests in a similar fashion.
 
 
 ### Developer Documentation
