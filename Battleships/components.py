@@ -22,7 +22,7 @@ def create_battleships(filename = 'battleships.txt'):
     battleships = {}
 
     # Loop through each line of the file and split it into the part before and after ':'
-    f = open(filename, 'r')
+    f = open('Battleships/' + filename, 'r')
     for line in f:
         battleships[line.split(':')[0]] = int(line.replace('\n', '').split(':')[1])
 
@@ -69,7 +69,7 @@ def place_battleships(board, ships, algorithm = 'Simple'):
              
 
     if algorithm == 'Custom':
-        f = open("placement.json", "r")
+        f = open("Battleships/placement.json", "r")
         data = json.load(f)
         f.close()
 
@@ -96,7 +96,7 @@ if __name__ == '__main__':
 
     # Runs a simple game against computer made board,
     # but just attacking with no computer return fire
-    g.simple_game_loop()
+    #g.simple_game_loop()
 
     # Runs a game against a random computer board and custom user board,
     # with the computer also returning fire against the users board
