@@ -94,7 +94,7 @@ def test_battleships_txt_exists():
     Test if the battleships.txt file exists.
     """
     try:
-        open("battleships.txt", "r")
+        open("Battleships/battleships.txt", "r")
     except FileNotFoundError:
         open("battleships_temp.txt", "w")
         testReport.add_message("battleships.txt file does not exist in your solution. "
