@@ -49,6 +49,6 @@ The `main.py` module utilizes the previous modules' functions through a Flask we
 
 ### Details
 
-Author: Anonymous  
+Author: Samuel McMullen  
 Source code: https://github.com/sfmcmullen/ECM1400ProgrammingCoursework  
 Acknowledgments: This was the coursework project made for ECM1400 at Exeter University
