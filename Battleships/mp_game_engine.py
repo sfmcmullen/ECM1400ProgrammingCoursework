@@ -1,4 +1,5 @@
 """Contains ai game functions"""
+import random as r
 import components as c
 import game_engine as g
 
@@ -10,7 +11,6 @@ ai_previous_attacks = []
 
 def generate_attack(board_size = 10):
     """Returns a tuple with coordinates to be passed to the attack function"""
-    import random as r
 
     y, x = r.randint(0, board_size - 1), r.randint(0, board_size - 1)
     while (y, x) in ai_previous_attacks:
@@ -39,33 +39,34 @@ def ai_opponent_game_loop():
         # User attack
         coordinates = g.cli_coordinates_input()
         result = {True: "hit", False: "missed"}
-        print(f"You {result[g.attack(coordinates, players['player2'], battleships['player2'])]} the AI.")
+        print(f"You {result[g.attack(coordinates, players['player2'],
+                                     battleships['player2'])]} the AI.")
         # AI attack
         coordinates = generate_attack()
         result = {True: "hit", False: "Miss"}
-        print(f"The AI {result[g.attack(coordinates, players['player1'], battleships['player1'])]} you.")
+        print(f"The AI {result[g.attack(coordinates, players['player1'],
+                                        battleships['player1'])]} you.")
 
         print("\nUser's Board")
         display_board(players['player1'])
         print("")
 
         # Used to check if there exists a ship longer than 0 (not sunk) for both players
-        if not(any(x != 0 for x in battleships['player1'].values())):
+        if not any(x != 0 for x in battleships['player1'].values()):
             print("~~~~~~ Good attempt. Better luck next time! ~~~~~~")
             break
-        if not(any(x != 0 for x in battleships['player2'].values())):
+        if not any(x != 0 for x in battleships['player2'].values()):
             print("~~~~~~ Congrats! You beat the AI ~~~~~~")
             break
 
 
 def display_board(board):
     """Displays an ASCII representation of the input board"""
-    #symbols = {'Aircraft_Carrier': 'A','Battleship': 'B', 'Cruiser': 'C', 'Submarine': 'S', 'Destroyer': 'D', None: '_'}
+
     ships = c.create_battleships()
     ship_keys = {None: "__"}
     for ship in ships:
         ship_keys[ship] = ship[0] + ship[1]
-
 
     row_num = 0
     print("   0  1  2  3  4  5  6  7  8  9")
@@ -76,7 +77,7 @@ def display_board(board):
             row_ascii += (f"{ship_keys[column]}|")
         print(f"{row_num} |{row_ascii}")
         row_num += 1
-    
+
     #Print the keys of the ships
     print("\nKEYS:")
     for ship in ship_keys:

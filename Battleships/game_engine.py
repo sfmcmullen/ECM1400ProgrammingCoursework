@@ -5,7 +5,7 @@ import components as c
 def attack(coordinates, board, battleships):
     """Return true if the coordinate (row,col) is a ship, else return false.
     If the ship value is 0 in battleships, then the ship is sunk."""
-    
+
     if board[int(coordinates[0])][int(coordinates[1])] is not None:
         #Decrement the value of remaining pieces in the battleships dictionary
         battleships[board[int(coordinates[0])][int(coordinates[1])]] -= 1
@@ -22,12 +22,12 @@ def cli_coordinates_input():
     try:
         y = int(input("What is the row you would like to attack? >>>"))
         x = int(input("What is the column you would like to attack? >>>"))
-    except TypeError:
-        raise TypeError("Incorrect value type entered.")
-    except ValueError:
-        raise ValueError("Incorrect value entered.")
-    except Exception:
-        raise Exception("Another error was encountered.")
+    except TypeError as exc:
+        raise TypeError("Incorrect value type entered.") from exc
+    except ValueError as exc:
+        raise ValueError("Incorrect value entered.") from exc
+    except Exception as exc:
+        raise Exception("Another error was encountered.") from exc
 
     return (y, x)
 
@@ -35,7 +35,7 @@ def cli_coordinates_input():
 
 def simple_game_loop():
     """Runs a single loop of the game."""
-    
+
     print("~~~~~ Welcome to Battleships! ~~~~~")
     board = c.initialise_board() #create board
     battleships = c.create_battleships() #create ships

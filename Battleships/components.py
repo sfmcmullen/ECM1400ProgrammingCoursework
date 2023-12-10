@@ -1,16 +1,17 @@
 '''Module containing functions to setup components of the game.'''
-import game_engine as g
-import mp_game_engine as mg
 import random as r
 import json
+import game_engine as g
+import mp_game_engine as mg
+
 
 def initialise_board(size = 10):
     """Returns a list of 'size' elements, with each 
     element being a list containing 'size' elements."""
     board = []
 
-    for _ in range(10):
-        board.append([None] * 10)
+    for _ in range(size):
+        board.append([None] * size)
 
     return board
 
@@ -22,7 +23,7 @@ def create_battleships(filename = 'battleships.txt'):
     battleships = {}
 
     # Loop through each line of the file and split it into the part before and after ':'
-    f = open('Battleships/' + filename, 'r')
+    f = open("Battleships/" + filename, "r")
     for line in f:
         battleships[line.split(':')[0]] = int(line.replace('\n', '').split(':')[1])
 
@@ -30,10 +31,10 @@ def create_battleships(filename = 'battleships.txt'):
 
 
 def place_battleships(board, ships, algorithm = 'Simple'):
-    """Places the battleships on the board using the 
+    """Places the battleships on the board using the
     specified algorithm and returns the board."""
 
-    # Board is accessed where each list is a row and then 
+    # Board is accessed where each list is a row and then
     # each item in the list is a column in that row
 
     if algorithm == 'Simple':
@@ -52,7 +53,7 @@ def place_battleships(board, ships, algorithm = 'Simple'):
                 while True:
                     row = r.randint(0, len(board) - 1)
                     col = r.randint(0, len(board) - ships[ship])
-                    if all(x == None for x in board[row][col : (col + ships[ship] + 1)]):
+                    if all(x is None for x in board[row][col : (col + ships[ship] + 1)]):
                         break
                 for i in range(ships[ship]):
                     board[row][col + i] = ship
@@ -62,11 +63,10 @@ def place_battleships(board, ships, algorithm = 'Simple'):
                     row = r.randint(0, len(board) - ships[ship])
                     col = r.randint(0, len(board) - 1)
 
-                    if all(board[row + x][col] == None for x in range(ships[ship])):
+                    if all(board[row + x][col] is None for x in range(ships[ship])):
                         break
                 for i in range(ships[ship]):
                     board[row + i][col] = ship
-             
 
     if algorithm == 'Custom':
         f = open("Battleships/placement.json", "r")
@@ -79,12 +79,12 @@ def place_battleships(board, ships, algorithm = 'Simple'):
             rotation = data[ship][2]
 
             if rotation == 'h':
-                # Sets every position in row, from start col 
+                # Sets every position in row, from start col
                 # to the ships length elements away from that position horizontally
                 for i in range(ships[ship]):
                     board[row][column + i] = ship
             else:
-                # Sets every position in col, from start row 
+                # Sets every position in col, from start row
                 # to the ships length elements away from that position vertically
                 for i in range(ships[ship]):
                     board[row + i][column] = ship

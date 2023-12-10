@@ -1,14 +1,14 @@
 """Main module"""
 
-from flask import Flask, render_template, request, jsonify
 import json
+from flask import Flask, render_template, request
 import components as c
 import game_engine as g
 import mp_game_engine as mg
 
 app = Flask(__name__)
 
-#Stores the ships in use this game. 
+#Stores the ships in use this game.
 # Not to be confused for the battleships dict that stores the individual player ship values.
 ships = c.create_battleships()
 #Dictionary of players. Key = Username, Value = Board
@@ -18,7 +18,7 @@ ai_previous_attacks = []
 #Stores the battleships for the user and AI
 battleships = {}
 #Stores the size of the board in use
-board_size = 10
+BOARD_SIZE = 10
 
 
 @app.route('/placement', methods = ['GET', 'POST'])
@@ -26,8 +26,8 @@ def placement_interface():
     """Placement function"""
 
     if request.method == 'GET':
-        return render_template('placement.html', ships = ships, board_size = board_size)
-    
+        return render_template('placement.html', ships = ships, board_size = BOARD_SIZE)
+
     if request.method == 'POST':
         player_pieces = request.get_json()
 
@@ -58,21 +58,23 @@ def process_attack():
 
         player_result = g.attack((y, x), players['AI'], battleships['AI'])
 
-        ai_attack = mg.generate_attack(board_size)
+        ai_attack = mg.generate_attack(BOARD_SIZE)
         while ai_attack in ai_previous_attacks:
-            ai_attack = mg.generate_attack(board_size)
+            ai_attack = mg.generate_attack(BOARD_SIZE)
         ai_previous_attacks.append(ai_attack)
         g.attack(ai_attack, players['player'], battleships['player'])
 
         #Used to check if there exists a ship longer than 0 (not sunk) for both players
-        if not(any(x != 0 for x in battleships['player'].values())):
+        if not any(x != 0 for x in battleships['player'].values()):
             #AI wins
-            return {"hit": player_result, "AI_Turn": ai_attack, 'finished': "The AI won! Better luck next time"} 
-        if not(any(x != 0 for x in battleships['AI'].values())):
+            return {"hit": player_result, "AI_Turn": ai_attack,
+                    'finished': "The AI won! Better luck next time"}
+        if not any(x != 0 for x in battleships['AI'].values()):
             #Player wins
-            return {"hit": player_result, "AI_Turn": ai_attack, 'finished': "You won! Congratulaions"}
-        else:
-            return {"hit": player_result, "AI_Turn": ai_attack}
+            return {"hit": player_result, "AI_Turn": ai_attack,
+                    'finished': "You won! Congratulaions"}
+        #Neither player has won yet
+        return {"hit": player_result, "AI_Turn": ai_attack}
 
 
 if __name__ == '__main__':
@@ -85,4 +87,3 @@ if __name__ == '__main__':
 
     app.template_folder = "templates"
     app.run()
-    
