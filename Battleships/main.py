@@ -31,12 +31,15 @@ def placement_interface():
     if request.method == 'POST':
         player_pieces = request.get_json()
 
-        with open('Battleships/placement.json', 'w', encoding = "utf-8") as file:
+        #RUN THIS VERSION WITH VSCODE
+        #with open('Battleships/placement.json', 'w', encoding = "utf-8") as file:
+        #    json.dump(player_pieces, file)
+        #RUN THIS VERSION WHEN IN REGULAR TERMINAL RUN USE
+        with open('placement.json', 'w', encoding = "utf-8") as file:
             json.dump(player_pieces, file)
 
         #Adds pieces to user board from placement.json
         players['player'] = c.place_battleships(players['player'], ships, 'Custom')
-        print(players['player'])
         #adds random pieces to AI board
         players['AI'] = c.place_battleships(players['AI'], ships, 'Random')
 
