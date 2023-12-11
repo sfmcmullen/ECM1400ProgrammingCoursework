@@ -5,29 +5,35 @@ import components as c
 def attack(coordinates, board, battleships):
     """Return true if the coordinate (row,col) is a ship, else return false.
     If the ship value is 0 in battleships, then the ship is sunk."""
-
-    if board[int(coordinates[0])][int(coordinates[1])] is not None:
-        #Decrement the value of remaining pieces in the battleships dictionary
-        battleships[board[int(coordinates[0])][int(coordinates[1])]] -= 1
-        #Set the square to 0 as that area has been sunk
-        board[int(coordinates[0])][int(coordinates[1])] = None
-        return True
+    try:
+        if board[int(coordinates[0])][int(coordinates[1])] is not None:
+            #Decrement the value of remaining pieces in the battleships dictionary
+            battleships[board[int(coordinates[0])][int(coordinates[1])]] -= 1
+            #Set the square to 0 as that area has been sunk
+            board[int(coordinates[0])][int(coordinates[1])] = None
+            return True
+    except Exception as exc:
+        print(f"An error was encountered:\n{exc}\n")
 
     return False
 
 
 def cli_coordinates_input():
     """Takes inputs for x, y coordinates and returns tuple."""
-
-    try:
-        y = int(input("What is the row you would like to attack? >>>"))
-        x = int(input("What is the column you would like to attack? >>>"))
-    except TypeError as exc:
-        raise TypeError("Incorrect value type entered.") from exc
-    except ValueError as exc:
-        raise ValueError("Incorrect value entered.") from exc
-    except Exception as exc:
-        raise Exception("Another error was encountered.") from exc
+    while True:
+        try:
+            y = int(input("What is the row you would like to attack? >>>"))
+            x = int(input("What is the column you would like to attack? >>>"))
+            break
+        except TypeError as exc:
+            print(f"Incorrect value type entered:\n{exc}\n")
+            #raise TypeError("Incorrect value type entered.") from exc
+        except ValueError as exc:
+            print(f"Incorrect value entered:\n{exc}\n")
+            #raise ValueError("Incorrect value entered.") from exc
+        except Exception as exc:
+            print(f"An error was encountered:\n{exc}\n")
+            #raise Exception("An error was encountered.") from exc
 
     return (y, x)
 
