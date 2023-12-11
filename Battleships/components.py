@@ -1,6 +1,7 @@
 '''Module containing functions to setup components of the game.'''
 import random as r
 import json
+import os
 import game_engine as g
 import mp_game_engine as mg
 
@@ -23,12 +24,7 @@ def create_battleships(filename = 'battleships.txt'):
     battleships = {}
 
     # Loop through each line of the file and split it into the part before and after ':'
-
-    #USED IN VSCODE
-    #f = open("Battleships/" + filename, "r", encoding = "utf-8")
-    #USED WHEN RUNNING REGULAR (FROM TERMINAL)
     f = open(filename, "r", encoding = "utf-8")
-    
     for line in f:
         battleships[line.split(':')[0]] = int(line.replace('\n', '').split(':')[1])
 
@@ -74,10 +70,6 @@ def place_battleships(board, ships, algorithm = 'Simple'):
                     board[row + i][col] = ship
 
     if algorithm == 'Custom':
-
-        #USED IN VSCODE
-        #f = open("Battleships/placement.json", "r", encoding = "utf-8")
-        #USED WHEN RUNNING REGULAR (FROM TERMINAL)
         f = open("placement.json", "r", encoding = "utf-8")
 
         data = json.load(f)
@@ -103,6 +95,18 @@ def place_battleships(board, ships, algorithm = 'Simple'):
 
 
 if __name__ == '__main__':
+    #Checks to see if current environment is VSCODE.
+    #VSCode uses working directory: ...\ECM1400ProgrammingCoursework
+    #Others uses: ...\ECM1400ProgrammingCoursework\Battleships
+    #If environment in use is vscode then changes the cwd to be followed by \Battleships
+    try:
+        environment = os.environ['TERM_PROGRAM']
+        if environment == 'vscode':
+            os.chdir(os.getcwd() + "\\Battleships")
+            print(f"Current direc: {os.getcwd()}")
+    except Exception as exc:
+        pass
+
 
     # Runs a simple game against computer made board,
     # but just attacking with no computer return fire

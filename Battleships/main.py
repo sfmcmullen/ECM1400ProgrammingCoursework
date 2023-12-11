@@ -1,23 +1,39 @@
 """Main module"""
 
+import os
 import json
 from flask import Flask, render_template, request
 import components as c
 import game_engine as g
 import mp_game_engine as mg
 
+
+# Checks to see if current environment is VSCODE.
+# VSCode uses working directory: ...\ECM1400ProgrammingCoursework
+# Others uses: ...\ECM1400ProgrammingCoursework\Battleships
+# If environment in use is vscode then changes the cwd to be followed by \Battleships
+try:
+    environment = os.environ['TERM_PROGRAM']
+    if environment == 'vscode':
+        os.chdir(os.getcwd() + "\\Battleships")
+        print(f"Current direc: {os.getcwd()}")
+except Exception as exc:
+    pass
+
+
+#Creates Flask app
 app = Flask(__name__)
 
-#Stores the ships in use this game.
+# Stores the ships in use this game.
 # Not to be confused for the battleships dict that stores the individual player ship values.
 ships = c.create_battleships()
-#Dictionary of players. Key = Username, Value = Board
+# Dictionary of players. Key = Username, Value = Board
 players = {}
-#Stores the values of previous attacks for generate_attack
+# Stores the values of previous attacks for generate_attack
 ai_previous_attacks = []
-#Stores the battleships for the user and AI
+# Stores the battleships for the user and AI
 battleships = {}
-#Stores the size of the board in use
+# Stores the size of the board in use
 BOARD_SIZE = 10
 
 
@@ -31,10 +47,6 @@ def placement_interface():
     if request.method == 'POST':
         player_pieces = request.get_json()
 
-        #RUN THIS VERSION WITH VSCODE
-        #with open('Battleships/placement.json', 'w', encoding = "utf-8") as file:
-        #    json.dump(player_pieces, file)
-        #RUN THIS VERSION WHEN IN REGULAR TERMINAL RUN USE
         with open('placement.json', 'w', encoding = "utf-8") as file:
             json.dump(player_pieces, file)
 
@@ -82,6 +94,8 @@ def process_attack():
 
 
 if __name__ == '__main__':
+
+
     #Initialise battleships dict for player and AI
     battleships['player'] = c.create_battleships()
     battleships['AI'] = c.create_battleships()
