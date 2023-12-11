@@ -72,11 +72,13 @@ def process_attack():
         x = request.args.get('x')
         y = request.args.get('y')
 
+        #Player coordinated inputted as (y,x) to frontend
         player_result = g.attack((y, x), players['AI'], battleships['AI'])
 
         ai_attack = mg.generate_attack(BOARD_SIZE)
         while ai_attack in ai_previous_attacks:
             ai_attack = mg.generate_attack(BOARD_SIZE)
+
         ai_previous_attacks.append(ai_attack)
         g.attack(ai_attack, players['player'], battleships['player'])
 
@@ -90,7 +92,7 @@ def process_attack():
             return {"hit": player_result, "AI_Turn": ai_attack,
                     'finished': "You won! Congratulaions"}
         #Neither player has won yet
-        return {"hit": player_result, "AI_Turn": ai_attack}
+        return {"hit": player_result, "AI_Turn": (ai_attack[1], ai_attack[0])}
 
 
 if __name__ == '__main__':
