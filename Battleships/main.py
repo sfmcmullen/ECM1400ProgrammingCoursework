@@ -31,7 +31,7 @@ def placement_interface():
     if request.method == 'POST':
         player_pieces = request.get_json()
 
-        with open('placement.json', 'w') as file:
+        with open('placement.json', 'w', encoding = "utf-8") as file:
             json.dump(player_pieces, file)
 
         #Adds pieces to user board from placement.json
