@@ -10,7 +10,7 @@ ai_previous_attacks = []
 
 
 def generate_attack(board_size = 10):
-    """Returns a tuple with coordinates to be passed to the attack function"""
+    """Returns a tuple with coordinates within range board_size"""
 
     y, x = r.randint(0, board_size - 1), r.randint(0, board_size - 1)
     while (y, x) in ai_previous_attacks:
