@@ -31,11 +31,12 @@ def placement_interface():
     if request.method == 'POST':
         player_pieces = request.get_json()
 
-        with open('placement.json', 'w', encoding = "utf-8") as file:
+        with open('Battleships/placement.json', 'w', encoding = "utf-8") as file:
             json.dump(player_pieces, file)
 
         #Adds pieces to user board from placement.json
         players['player'] = c.place_battleships(players['player'], ships, 'Custom')
+        print(players['player'])
         #adds random pieces to AI board
         players['AI'] = c.place_battleships(players['AI'], ships, 'Random')
 
@@ -82,8 +83,8 @@ if __name__ == '__main__':
     battleships['player'] = c.create_battleships()
     battleships['AI'] = c.create_battleships()
     #Create empty boards for player and AI
-    players['player'] = c.initialise_board()
-    players['AI'] = c.initialise_board()
+    players['player'] = c.initialise_board(BOARD_SIZE)
+    players['AI'] = c.initialise_board(BOARD_SIZE)
 
     app.template_folder = "templates"
     app.run()
