@@ -32,6 +32,7 @@ Once you have completed the placement and submitted your grid you will be redire
 
 To test that the code is running correctly on your device there is a folder in the Battleships directory called tests. From there there are several modules to test different aspects of the code.  
 If using VS code to run the program you can use the Python test manager (flask icon on sidebar) and configure it so that the test folder is the *tests* folder from the current Battleships directory. Then just run the tests folder within the test manager using the play button and if any test fails you will be able to see the test and its error. For other IDEs, you should use their respective test managers to run the tests in a similar fashion.  
+
 *The current tests that were provided do not run in the current package file format, so expect errors if using the tests. This is because the tests were made to work with a single folder, so use the packaage folder as the working directory instead of the project file (Battleships). If you would like to use the current tests place all files from within the Battleships folder into the main directory, so it is not in a project format.*
 
 
