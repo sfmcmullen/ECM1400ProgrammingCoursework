@@ -70,7 +70,7 @@ def display_board(board):
 
     row_num = 0
     print("   0  1  2  3  4  5  6  7  8  9")
-    print("   ____________________________")
+    print("   _____________________________")
     for row in board:
         row_ascii = ""
         for column in row:
