@@ -1,4 +1,10 @@
-"""Main module"""
+"""
+Module for the launching and running of the Flask web interface.
+It creates an app route page where the attacks will take place and
+also a placement page where the user will initlaise thier board.
+The main game will then run in the back end here using the user's
+web interface inputs.
+"""
 
 import os
 import json
@@ -16,7 +22,6 @@ try:
     environment = os.environ['TERM_PROGRAM']
     if environment == 'vscode':
         os.chdir(os.getcwd() + "\\Battleships")
-        print(f"Current direc: {os.getcwd()}")
 except Exception as exc:
     pass
 
@@ -39,7 +44,11 @@ BOARD_SIZE = 10
 
 @app.route('/placement', methods = ['GET', 'POST'])
 def placement_interface():
-    """Placement function"""
+    """
+    Accepts a POST request containig the players board in the form of a config.json.
+    Accepts a GET request which returns the placement.html template with a ships 
+    dictionary and board size.
+    """
 
     if request.method == 'GET':
         return render_template('placement.html', ships = ships, board_size = BOARD_SIZE)
@@ -60,14 +69,20 @@ def placement_interface():
 
 @app.route('/', methods = ['GET'])
 def root():
-    """Root page function"""
-
+    """
+    Returns the main.html template, passing a player board to the template.
+    """
     return render_template('main.html', player_board = players['player'])
 
 
 @app.route('/attack', methods = ['GET'])
 def process_attack():
-    """Attack function"""
+    """
+    Accepts GET request contains two parameter x and y.
+    If game is still playing it returns {"hit": player_attack, "AI_Turn": ai_attack}.
+    If game is over it returns {"hit": player_attack, "AI_Turn": ai_attack, 
+    'finished': "finish messsage"}.
+    """
     if request.args:
         x = request.args.get('x')
         y = request.args.get('y')
@@ -96,8 +111,6 @@ def process_attack():
 
 
 if __name__ == '__main__':
-
-
     #Initialise battleships dict for player and AI
     battleships['player'] = c.create_battleships()
     battleships['AI'] = c.create_battleships()

@@ -1,4 +1,7 @@
-'''Module containing functions to setup components of the game.'''
+"""
+Module containing functions to setup components of the game.
+"""
+
 import random as r
 import json
 import os
@@ -7,8 +10,10 @@ import mp_game_engine as mg
 
 
 def initialise_board(size = 10):
-    """Returns a list of 'size' elements, with each 
-    element being a list containing 'size' elements."""
+    """
+    Returns a list of 'size' elements, with each 
+    element being a list containing 'size' elements.
+    """
     board = []
 
     for _ in range(size):
@@ -18,8 +23,10 @@ def initialise_board(size = 10):
 
 
 def create_battleships(filename = 'battleships.txt'):
-    """Reads the file 'filename' and returns a dictionary containing 
-    keys as battleship name and value as its size."""
+    """
+    Reads the file 'filename' and returns a dictionary containing 
+    keys as battleship name and value as its size.
+    """
 
     battleships = {}
 
@@ -32,8 +39,10 @@ def create_battleships(filename = 'battleships.txt'):
 
 
 def place_battleships(board, ships, algorithm = 'Simple'):
-    """Places the battleships on the board using the
-    specified algorithm and returns the board."""
+    """
+    Places the ships on the board using the specified algorithm
+    and returns the board.
+    """
 
     # Board is accessed where each list is a row and then
     # each item in the list is a column in that row
@@ -103,7 +112,6 @@ if __name__ == '__main__':
         environment = os.environ['TERM_PROGRAM']
         if environment == 'vscode':
             os.chdir(os.getcwd() + "\\Battleships")
-            print(f"Current direc: {os.getcwd()}")
     except Exception as exc:
         pass
 

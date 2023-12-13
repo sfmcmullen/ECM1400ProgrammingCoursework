@@ -1,4 +1,9 @@
-"""Contains ai game functions"""
+"""
+Module containing the functions used to have an AI attack the user's
+board during the runtime of the game. The AI will have a unique generated
+attack each move. The ai_opponent_game_loop with 2 boards (user and AI)
+and the winner is the last one with a ship remaining.
+"""
 import random as r
 import components as c
 import game_engine as g
@@ -21,7 +26,9 @@ def generate_attack(board_size = 10):
 
 
 def ai_opponent_game_loop():
-    """Runs a single loop of the game against ai"""
+    """
+    Runs a single loop of the game where the user will compete against a random AI opponent.
+    """
 
     print("~~~~~ Welcome to Battleships! ~~~~~")
 
@@ -61,7 +68,9 @@ def ai_opponent_game_loop():
 
 
 def display_board(board):
-    """Displays an ASCII representation of the input board"""
+    """
+    Displays an ASCII representation of the input board.
+    """
 
     ships = c.create_battleships()
     ship_keys = {None: "__"}

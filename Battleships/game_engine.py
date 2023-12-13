@@ -1,10 +1,21 @@
-"""Contains in-game functions"""
+"""
+Module containing the functions used to carry out a request for user's
+attack coordinates and then an attack involving the request coordinates.
+Simple game loop then utilises these functions to carry out a game against
+a simple board.
+"""
+
 import components as c
 
 
 def attack(coordinates, board, battleships):
-    """Return true if the coordinate (row,col) is a ship, else return false.
-    If the ship value is 0 in battleships, then the ship is sunk."""
+    """
+    Take the coordinates (row,col) to attack and which board to complete
+    the attack on as 2 parameters. The 3rd parameter battleships will update
+    the value of the battleshiop that has been struck to be reduced in length
+    by 1. It will return true if the coordinate is a ship, else return false.
+    If the ship value is 0 in battleships, then the ship is sunk.
+    """
     try:
         if board[int(coordinates[0])][int(coordinates[1])] is not None:
             #Decrement the value of remaining pieces in the battleships dictionary
@@ -19,7 +30,10 @@ def attack(coordinates, board, battleships):
 
 
 def cli_coordinates_input():
-    """Takes inputs for x, y coordinates and returns tuple."""
+    """
+    Gets a user input via the terminal for a row and column to attack and
+    then returns the value as a tuple (row, col)/(y, x).
+    """
     while True:
         try:
             y = int(input("What is the row you would like to attack? >>>"))
@@ -40,7 +54,10 @@ def cli_coordinates_input():
 
 
 def simple_game_loop():
-    """Runs a single loop of the game."""
+    """
+    Runs a single loop of the game where the user will attack a simple
+    generated board.
+    """
 
     print("~~~~~ Welcome to Battleships! ~~~~~")
     board = c.initialise_board() #create board
