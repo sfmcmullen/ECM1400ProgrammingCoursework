@@ -2,12 +2,6 @@ from components import initialise_board, create_battleships, place_battleships
 from game_engine import attack
 from mp_game_engine import generate_attack
 
-# Due to VScode using different working directories either 
-# comment or uncomment the following two blocks of code
-# For when testing in VScode:
-file_route_prefix = 'Battleships/'
-# For when testing outside VScode:
-#file_route_prefix = ''
 
 def test_initialise_board_return_size():
     """
@@ -32,7 +26,7 @@ def test_create_battleships_return_values():
     Test if the create_battleships function reads from the batlleships.txt file 
     and returns a dictionary in the correct format of Ship:Size containing these values.
     """
-    filename = file_route_prefix + "battleships.txt"
+    filename = "battleships.txt"
     # Run the function
     ships = create_battleships(filename)
     # Check that the return is a dictionary

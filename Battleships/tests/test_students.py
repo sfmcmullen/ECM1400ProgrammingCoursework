@@ -7,15 +7,6 @@ import tests.test_helper_functions as thf
 testReport = thf.TestReport("test_report.txt")
 
 
-# Due to VScode using different working directories either 
-# comment or uncomment the following two blocks of code
-# For when testing in VScode:
-file_route_prefix = 'Battleships/'
-# For when testing outside VScode:
-#file_route_prefix = ''
-
-import os#########
-
 ########################################################################################################################
 # Test Components.py functions
 ########################################################################################################################
@@ -103,9 +94,9 @@ def test_battleships_txt_exists():
     Test if the battleships.txt file exists.
     """
     try:
-        open(file_route_prefix + "battleships.txt", "r")
+        open("battleships.txt", "r")
     except FileNotFoundError:
-        open(file_route_prefix + "battleships_temp.txt", "w")
+        open("battleships_temp.txt", "w")
         testReport.add_message("battleships.txt file does not exist in your solution. "
                                "A file called battleships_temp.txt has been created in the expected location. "
                                "Please rename this file to battleships.txt and add your battleships to it.")
@@ -120,7 +111,7 @@ def test_create_battleships_argument():
     components = importlib.import_module('components')
 
     try:
-        components.create_battleships(file_route_prefix + "battleships.txt")
+        components.create_battleships("battleships.txt")
     except TypeError:
         testReport.add_message("create_battleships function does not accept a string argument")
         pytest.fail("create_battleships function does not accept a string argument")
@@ -139,7 +130,7 @@ def test_create_battleships_return_type():
     components = importlib.import_module('components')
 
     try:
-        assert thf.is_dict_of_type(components.create_battleships(file_route_prefix + "battleships.txt"), str, int)
+        assert thf.is_dict_of_type(components.create_battleships("battleships.txt"), str, int)
     except AssertionError:
         testReport.add_message("create_battleships function does not return a dictionary")
         pytest.fail("create_battleships function does not return a dictionary")
@@ -193,7 +184,7 @@ def test_place_battleships_arguments():
 
     try:
         board = components.initialise_board(10)
-        ships = components.create_battleships(file_route_prefix + "battleships.txt")
+        ships = components.create_battleships("battleships.txt")
         components.place_battleships(board, ships)
     except TypeError:
         testReport.add_message("place_battleships function does not accept a list (board) and a dictionary argument")
@@ -214,7 +205,7 @@ def test_place_battleships_return_type():
     components = importlib.import_module('components')
 
     board = components.initialise_board(10)
-    ships = components.create_battleships(file_route_prefix + "battleships.txt")
+    ships = components.create_battleships("battleships.txt")
     try:
         assert thf.is_list_of_lists(components.place_battleships(board, ships), str), ("place_battleships function "
                                                                                        "does not return a list of "
@@ -270,7 +261,7 @@ def test_attack_arguments():
         game_engine = importlib.import_module('game_engine')
         coordinates = (1, 1)
         board = components.initialise_board(10)
-        battleships = components.create_battleships(file_route_prefix + "battleships.txt")
+        battleships = components.create_battleships("battleships.txt")
         game_engine.attack(coordinates, board, battleships)
     except TypeError:
         testReport.add_message("attack function does not accept a tuple, a list, and a dictionary argument")
